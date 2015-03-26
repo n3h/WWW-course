@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html lang="en">
+<head>
+    <title>Nivo Slider Demo</title>
+    <link rel="stylesheet" href="../themes/default/default.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../themes/light/light.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../themes/dark/dark.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../themes/bar/bar.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../nivo-slider.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+	
+</head>
+<body>
+    <div id="wrapper">
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <img src="images/toystory.jpg" data-thumb="images/toystory.jpg" alt="" title="#opis1" />
+                <img src="images/up.jpg" data-thumb="images/up.jpg" alt="" title="#opis2" />
+                <img src="images/walle.jpg" data-thumb="images/walle.jpg" alt="" title="#opis3" />
+                <img src="images/nemo.jpg" data-thumb="images/nemo.jpg" alt="" title="#opis4" />
+				<img src="images/up.jpg" data-thumb="images/nemo.jpg" alt="" title="#opis5" />
+            </div>
+			<div id="opis1" class="nivo-html-caption">
+                OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1-OPIS1
+            </div>
+			<div id="opis2" class="nivo-html-caption">
+                OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2-OPIS2
+            </div>
+			<div id="opis3" class="nivo-html-caption">
+                OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3-OPIS3
+            </div>
+            <div id="opis4" class="nivo-html-caption">
+                <strong>OPIIIIIIIIIIIIS4</strong>
+            </div>
+            <div id="opis5" class="nivo-html-caption">
+                <strong>OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5 OPIIIIIIIIIIIIS5</strong>
+            </div>
+        </div>
+
+    </div>
+	<br /> <br />
+	<div id="opis" class="slider-wrapper"></div>
+	  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript" src="../jquery.nivo.slider.js"></script>
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider({
+		effect: 'fade',
+		startSlide:0,
+		directionNavHide:true,
+		controlNav:true,
+		afterChange: function(){ 
+			var slajd = $('#slider').data("nivo:vars").currentImage.attr('title');
+		//	var opisik = $(slajd); 
+			$('#opis').html($(slajd).html()); 
+		}
+		, afterLoad: function() {
+        var slajd = $('#slider').data("nivo:vars").currentImage.attr('title');
+		//	var opisik = $(slajd); 
+			$('#opis').html($(slajd).html()); 
+    }
+		
+		});
+    });
+    </script>
+</body>
+</html>

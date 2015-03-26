@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>...</title>
+
+</head>
+<body>
+
+<p>http://webmaster.helion.pl/index.php/pozycjonowanie</p>
+
+<p style="position:static; ">Domyślne</p>
+<p style="position:static; left:30px">Statyczne!</p>
+
+<p>Statyczne: Jest to naturalne pozycjonowanie elementu, wynikające z kolejności wystąpienia w dokumencie HTML, na które nie ma wpływu nawet podanie odległości od innych elementów. <br />
+Absolute - Element, po odsunięciu go od pozycji początkowej, nie będzie oddziaływał na inne elementy HTML (nie będzie zmieniał ich pozycji). Ważne: elementy pozycjonowane w sposób "absolutny" są wlewane do zarezerwowanych obszarów w ramach najbliższego pojemnika wyższego szczebla w hierarchii, czyli rodzica, i zajmują tam miejsce bez względu na pozycję innych elementów.<br />
+względne (relatywne) czyli przesunięcie o 50 pikseli w prawo i 30 pikseli w dół w stosunku do naturalnego położenia elementu w dokumencie, które byłoby użyte, gdyby nie definiowano pozycjonowania względnego.
+</p>
+
+<p style="position: relative; left: 200px; top: 50px;">Relatywne!</p>
+<br /><br />
+
+<div style="position: relative; width: 400px; height: 350px; border: 1px solid black;">
+	<p style="position: absolute; bottom: 10%; border: 1px solid green; width: 200px;">Absolutne!</p>
+</div>
+<br />
+<div style="position:fixed; top:5em; right:10em;">
+<p>Fixed! Ustalone!</p>
+</div>
+
+<br /> <br /> <br /> <br /> <br />
+ 
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>...</title>
+
+</head>
+<body>
+
+<form name="formularz1" action="">
+Jednowierszowe: <br /> 
+	<input id="jednowierszowe" type="text" size="30" maxlength="60" /> <br /> <br />
+Wielowierszowe: <br />
+	<textarea id="wielowierszowe" rows="4" cols="30">Tekst domyślny.</textarea> <br /> <br />
+
+Lista: <br />
+<select id="lista" name="lista">
+	<option selected="selected" value="brakodp">Nie wybano</option>
+	<optgroup label="Audi">
+		<option value="a3">Audi A3</option>
+		<option value="a4">Audi A4</option>
+		<option value="a8">Audi A8</option>
+	</optgroup>
+	<optgroup label="Skoda">
+		<option value="fabia">Skoda Fabia</option>
+		<option value="octavia">Skoda Octavia</option>
+		<option value="roomster">Skoda Roomster</option>
+	</optgroup>
+	<optgroup label="Fiat">
+		<option value="125p">Fiat 125p</option>
+		<option value="126p">Fiat 126p</option>
+		<option value="panda">Fiat Panda</option>
+	</optgroup>
+</select>
+<br /> <br />
+Zainteresowania: <br />
+	<input name="sport" type="checkbox" value="sp" /> Sport
+	<input name="c2" type="checkbox" checked="checked" value="1" /> Muzyka
+	<input name="c3" type="checkbox" value="2" /> Polityka
+<br /> <br />
+Płeć: <br />
+	<input type="radio" checked="checked" name="plec" value="k"/> Kobieta
+	<input type="radio" name="plec" value="m"/> Mężczyzna
+
+<br /> <br />
+<input type="submit" value="Wyślij" />
+
+</form>
+
+</body>
+</html>

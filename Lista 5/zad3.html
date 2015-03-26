@@ -1,0 +1,202 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Dialog - Modal form</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <style>
+    body { font-size: 62.5%; }
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+	#dialogconfirm{
+        display:none;
+    }
+  </style>
+  <script>
+  var numerek=2;
+  $(function() {
+    var imie = $( "#imie" ), nazwisko = $( "#nazwisko" ), miasto = $( "#miasto" ), kodpocztowy = $( "#kodpocztowy" ), dataurodzenia = $( "#dataurodzenia" ),
+      allFields = $( [] ).add( imie ).add( nazwisko ).add( miasto ).add( kodpocztowy ).add( dataurodzenia ),
+      tips = $( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+ 
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Długość " + n + " musi być pomiędzy " + min + " a " + max + "." );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Dodaj osobę": function() {
+          var bValid = true;
+          allFields.removeClass( "ui-state-error" );
+ 
+          bValid = bValid && checkLength( imie, "imie", 3, 16 );
+		  bValid = bValid && checkLength( nazwisko, "nazwisko", 3, 16 );
+		  bValid = bValid && checkLength( miasto, "miasto", 3, 16 );
+		  bValid = bValid && checkLength( kodpocztowy, "kodu pocztowego", 3, 16 );
+		  bValid = bValid && checkLength( dataurodzenia, "daty urodzenia", 3, 16 );
+ 
+          bValid = bValid && checkRegexp( imie, /^[a-zA-Z]+$/i, "Imię musi zawierać wyłącznie duże lub małe litery" );
+		  bValid = bValid && checkRegexp( nazwisko, /^[a-zA-Z]+$/i, "Nazwisko musi zawierać wyłącznie duże lub małe litery" );
+		  bValid = bValid && checkRegexp( miasto, /^[a-zA-Z]+$/i, "Miasto musi musi zawierać wyłącznie duże lub małe litery" );
+		  bValid = bValid && checkRegexp( kodpocztowy, /^[0-9\-]+$/i, "Kod pocztowy musi zawierać cyfry lub znak -" );
+	//	  bValid = bValid && checkRegexp( dataurodzenia, /^[a-zA-Z]+$/i, "Imię may consist of a-z, 0-9, underscores, begin with a letter." );
+          // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+ 
+          if ( bValid ) {
+			numerek=numerek+1;
+            $( "#users tbody" ).append( "<tr id=\"" + numerek + "\">" +
+              "<td>" + imie.val() + "</td>" +
+			  "<td>" + nazwisko.val() + "</td>" +
+			  "<td>" + miasto.val() + "</td>" +
+			  "<td>" + kodpocztowy.val() + "</td>" +
+			  "<td>" + dataurodzenia.val() + "</td>" + "<td>" + "<input type='button' onclick='usuwanie(" + numerek + ")' value='Usuń!' id='showDialog' />" + "</td>" +
+            "</tr>" );
+            $( this ).dialog( "close" );
+          }
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+      }
+    });
+ 
+    $( "#create-user" )
+      .button()
+      .click(function() {
+        $( "#dialog-form" ).dialog( "open" );
+      });
+  });
+  
+   $(function() {
+     $( "#dataurodzenia" ).datepicker({ dateFormat: 'dd-mm-yy' });
+  });
+
+
+
+  
+  
+  
+  </script>
+
+
+</head>
+<body>
+ 
+<div id="dialog-form" title="Dodaj nową osobę">
+  <p class="validateTips">Wszystkie pola są wymagane</p>
+ 
+  <form>
+  <fieldset>
+    <label for="imie">Imię</label>
+    <input type="text" name="imie" id="imie" class="text ui-widget-content ui-corner-all" />
+    <label for="nazwisko">Nazwisko</label>
+    <input type="text" name="nazwisko" id="nazwisko" class="text ui-widget-content ui-corner-all" />
+    <label for="miasto">Miasto</label>
+    <input type="text" name="miasto" id="miasto" class="text ui-widget-content ui-corner-all" />
+    <label for="kodpocztowy">Kod pocztowy</label>
+    <input type="text" name="kodpocztowy" id="kodpocztowy" class="text ui-widget-content ui-corner-all" />
+    <label for="dataurodzenia">Data urodzenia</label>
+    <input type="text" name="dataurodzenia" id="dataurodzenia" class="text ui-widget-content ui-corner-all" />
+  </fieldset>
+  </form>
+</div>
+ 
+ 
+<div id="users-contain" class="ui-widget">
+  <h1>Istniejące osoby:</h1>
+  <table id="users" class="ui-widget ui-widget-content">
+    <thead>
+      <tr class="ui-widget-header ">
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Miasto</th>
+		<th>Kod pocztowy</th>
+		<th>Data urodzenia</th>
+		<th>Usuń wpis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="1">
+        <td>John</td>
+        <td>Doe</td>
+        <td>Wrocław</td>
+		<td>48-200</td>
+		<td>20-11-2012</td>
+		<td><input type='button' onclick="usuwanie(1)" value='Usuń!' id='showDialog' /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button id="create-user">Dodaj nową osobę</button>
+ 
+ 
+ 
+ <div id="dialogconfirm" title="Empty the recycle bin?">
+  Czy na pewno chcesz usunąć ten wpis?
+</div> 
+ <script>
+   function usuwanie(id) {
+    $( "#dialogconfirm" ).dialog({
+    //  resizable: false,
+	//  autoOpen: false,
+        modal: true,
+        title: "Jesteś pewny?",
+        buttons: {
+            "YES": function() {
+             //   $( "tr:eq(" + id + ")" ).remove();
+				$( "#" + id ).remove();
+				$( this ).dialog( "close" );
+            },
+            "NO": function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+  }
+  </script>
+ 
+</body>
+</html>

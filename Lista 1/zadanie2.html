@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>p, div, span, pre, h1, h2, strong, a</title>
+</head>
+<body>
+<p>test-p</p>
+<div>test-div</div>
+<span>test-span</span>
+<div>
+	<pre>test-pre</pre> <br />
+	<h1>test-h1</h1> <br />
+	<h2>test-h2</h2> <br />
+	<strong>test-strong</strong> <br />
+	<a>test-a</a> <br />
+	<a href="http://onet.pl">odnosnik onet</a> <br />
+	<a href="onet.pl">odnosnik bez http, pewnie nie działa</a> <br /> <br />
+</div>
+
+<div><span>span w div - ok</span></div>
+<span><div>div w span - źle</div></span>
+<span><p>p w span - źle</p></span>
+<p><div>div w p - źle</div></p>
+<div><p>p w div - ok</p></div>
+<a href="http://onet.pl"><div>odnosnik onet div - źle</div></a> <br />
+<a href="http://onet.pl"><span>odnosnik onet w spanie - ok</span></a> <br />
+<a href="http://onet.pl"><pre>odnosnik onet w pre - źle</pre></a> <br />
+<pre><a href="http://onet.pl">pre, a potem odnosnik onet - ok</a> <br /></pre>
+<a href="http://onet.pl"><h2>odnosnik onet, a potem h2 - źle</h2></a> <br />
+<a href="http://onet.pl"><a href="http://wp.pl">odnosnik onet, potem odnosnik wp - źle</a></a> <br />
+
+</body>
+</html>

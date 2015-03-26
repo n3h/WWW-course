@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>zad2</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" language="javascript">
+
+var tworzTabelke = function () {
+
+    var data, 
+	target, 
+	options;
+
+	var createCell = function (content) {
+	$(target).children('table').children('tbody').children('tr:last-child').append('<td>'+content+'</td>');
+	}
+	
+	var createRow = function (content) { 
+	$(target.children).append('<tr></tr>');
+		for(var j=0; j<content.length; j++)
+		{
+		createCell(content[j]);
+		}
+	}
+	
+	var createHeader = function () { 
+		$(target).children('table').append('<thead><tr><td colspan=\"'+data[0].length+'\">NAGŁÓWEK!!!</td></tr></thead>');
+	}
+	
+	//var createFooter = function () { target.innerHTML += '</table>'; }
+	var createFooter = function () { $(target).children('table').append('<tfoot><tr><td colspan=\"'+data[0].length+'\">STOPKA!!!</td></tr></tfoot>'); }
+
+    var init = function (d,t,o) {
+		data = d;
+		target = t;
+		options = o;
+		generate();
+    }
+
+	var generate = function () {
+		$(target).html("<table>");
+		for (var k=0; k<options.length; k+=2) {
+			$(target).children('table').css(options[k], options[k+1]);
+		}
+		createHeader();
+		for (var i=0; i<data.length; i++) {
+			createRow(data[i]);
+		}
+		createFooter();
+
+	}
+
+    return {
+        init: init,
+        generate: generate
+    }
+};
+
+</script>
+</head>
+
+<body>
+
+<script>
+var obj = tworzTabelke();
+var obj2 = tworzTabelke();
+var d1 = [['Aj','33','C','o'],['D','fh','F','ty'],['a','b','c','d']];
+var d2 = [['A','B','C'],['D','E','F']];
+var o1 = ['padding', '20px', 'border', '10px solid gray'];
+var o2 = [];
+
+
+</script>
+<input type='button' value='Tabela 1' id='button' onclick='obj.init(d1,tab1,o1)'>
+<input type='button' value='Tabela 2' id='button' onclick='obj2.init(d2,tab2,o2)'>
+
+
+<div id="tab1"></div>
+
+<br /> <br /> <br />
+<div id="tab2"></div>
+
+
+
+</body>
+</html>

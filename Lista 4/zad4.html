@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>zad4</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+<style type="text/css">
+    .aktyw{
+        z-index:1;
+    }
+</style>
+<script>
+var oczekiwanie
+    $(function() {
+		oczekiwanie = setInterval( "przewin()", 3000 ); 
+	$('#ppp').hover(function(){
+		clearInterval(oczekiwanie);
+	}, function(){
+		oczekiwanie = setInterval( "przewin()", 3000 );
+	});
+});
+
+    function przewin() {
+        var $aktywny = $('div#ppp img.aktyw');
+        var $nastepny = $aktywny.next();    
+		
+	if ($nastepny.length == 0) {
+		$aktywny.siblings(":first").addClass('aktyw'); 
+	}
+
+        $nastepny.addClass('aktyw');
+        $aktywny.removeClass('aktyw');
+		
+		
+		
+		
+	$('.nast').click(function(){    
+		clearInterval(oczekiwanie);
+        var $aktywny = $('div#ppp img.aktyw');
+        var $nastepny = $aktywny.next();    
+		
+	if ($nastepny.length == 0) {
+		$aktywny.siblings(":first").addClass('aktyw'); 
+	}
+
+        $nastepny.addClass('aktyw');
+        $aktywny.removeClass('aktyw');
+		oczekiwanie = setInterval( "przewin()", 3000 );
+		}); 
+	
+    $('.poprz').click(function(){ 
+		clearInterval(oczekiwanie);
+	    var $aktywny = $('div#ppp img.aktyw');
+        var $nastepny = $aktywny.prev();    
+		
+	if ($nastepny.length == 0) {
+		$aktywny.siblings(":last").addClass('aktyw'); 
+	}
+
+        $nastepny.addClass('aktyw');
+        $aktywny.removeClass('aktyw');
+	oczekiwanie = setInterval( "przewin()", 3000 );
+    }); 
+		
+
+    }
+
+</script>
+</head>
+
+<body>
+
+<div id="ppp" style="width:300px;height:300px; border:1px solid gray;">
+    <img src="1.jpg" style="position:absolute;" class="aktyw" />
+    <img src="2.jpg" style="position:absolute;" />
+    <img src="3.jpg" style="position:absolute;" />
+</div>
+<div style="">
+    <a href="#" class="poprz">Poprzedni</a>
+    <a href="#" class="nast">Następny</a>
+</div>
+
+</body>
+</html>

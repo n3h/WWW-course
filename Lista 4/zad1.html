@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>zad1</title>
+<script language="javascript" type="text/javascript">
+
+function sprawdzPesel() {
+    var formularz = document.forms[0];
+    var tekst = formularz.Pesel.value;
+	var wzorzec = /^[0-9]{2}(0[1-9]|[1][0-2])(0[1-9]|[12][0-9]|3[01])[0-9]{5}$/;
+    if (wzorzec.test(tekst)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function sprawdzEmail() {
+	var formularz = document.forms[0];
+    var tekst = formularz.Email.value;
+    var wzorzec = /^[0-9a-z_.-]+@[0-9a-z.-]+\.[a-z]{2,3}$/i;
+    if (wzorzec.test(tekst)) {
+        return true;
+    } else {
+        return false;
+    }       
+}
+
+function sprawdzDate() {
+    var formularz = document.forms[0];
+    var tekst = formularz.Data.value;
+	var pesel = formularz.Pesel.value;
+	var wzorzec = /^((19|20)\d\d)\.(0[1-9]|[1][0-2])\.(0[1-9]|[12][0-9]|3[01])$/;
+	var rok = pesel.slice(0, 2);
+	var miesiac = pesel.slice(2, 4);
+	var dzien = pesel.slice(4, 6);
+
+    if ((wzorzec.test(tekst))&&(rok==(tekst.slice(2,4)))&&(miesiac==(tekst.slice(5,7)))&&(dzien==(tekst.slice(8,10)))) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function sprawdzMiasto() {
+	var formularz = document.forms[0];
+    if (formularz.Miasto.selectedIndex!=0) {
+		return true;
+    }
+	return false;
+}
+
+function sprawdzPlec() {
+	var formularz = document.forms[0];
+	for (x=0; x<formularz.Plec.length; x++) {
+    if (formularz.Plec[x].checked) {
+		return true;
+    }
+	return false;
+}
+}
+
+
+function checkForm()
+{
+var errors = false;
+document.getElementById('message').innerHTML = '';
+
+if (!(sprawdzPesel()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nieprawidłowy PESEL</b><br />';
+}
+
+if (!(sprawdzEmail()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nieprawidłowy E-mail</b><br />';
+}
+
+if (!(sprawdzDate()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nieprawidłowa data</b><br />';
+}
+
+if (!(sprawdzMiasto()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nie zaznaczyłeś(aś) miasta</b><br />';
+}
+
+if (!(sprawdzPlec()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nie zaznaczyłeś(aś) płci</b><br />';
+}
+
+// sprawdzenie poprawnosci formularza
+if (errors) document.getElementById('message').innerHTML = '<b>Błędy w formularzu:</b><br />'+document.getElementById('message').innerHTML;
+else document.getElementById('message').innerHTML = '<b>Dane zapisane</b><br />';
+return false;
+}
+</script>
+</head>
+<body>
+<div id="message"></div>
+<form name="dane" action="#" onsubmit="return checkForm()">
+<table>
+<tr><td>PESEL</td>
+<td><input type="text" name="Pesel" id="Pesel" /></td></tr>
+<tr><td>E-mail</td>
+<td><input type="text" name="Email" id="Email" /></td></tr>
+<tr><td>Data urodzenia</td>
+<td><input type="text" name="Data" id="Data" /></td></tr>
+<tr><td>Miasto</td>
+<td><select name="Miasto" id="Miasto">
+<option value="0" selected="selected">---</option>
+<option value="wroclaw">Wrocław</option>
+<option value="krakow">Kraków</option>
+<option value="poznan">Warszawa</option>
+</select></td></tr>
+<tr><td>Płeć</td>
+<td><input type="radio" name="Plec" value="m" /> M
+<input type="radio" name="Plec" value="k" /> K</td></tr>
+<tr><td colspan="2"><input type="submit" value="Zapisz" /></td></tr>
+</table>
+</form>
+</body>
+</html>

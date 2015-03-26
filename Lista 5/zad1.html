@@ -1,0 +1,131 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Progressbar - Custom Label</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+  <style>
+  .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 40%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  </style>
+  <script>
+  $(function() {
+    var progressbar = $( "#progressbar" ),
+      progressLabel = $( ".progress-label" );
+ 
+    progressbar.progressbar({
+      value: false,
+      change: function() {
+        progressLabel.text( progressbar.progressbar( "value" ) + " liczba Fibonacciego" );
+      },
+	        complete: function() {
+        progressLabel.text( "100%!" );
+      }
+    });
+ 
+    function progress() {
+      var val = progressbar.progressbar( "value" ) || 0;
+ 
+      progressbar.progressbar( "value", val + 1 );
+ 
+      if ( val < 99 ) {
+        setTimeout( progress, 100 );
+      }
+    }
+	
+	
+  //  setTimeout( progress, 3000 );
+  });
+  
+
+    function sprawdzFib() {
+    var formularz = document.forms[0];
+    var tekst = formularz.Fibon.value;
+	var wzorzec = /^[0-9]{1,}$/;
+    if (wzorzec.test(tekst)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function liczymy()
+{
+$(document).ready(function() {
+	var formularz = document.forms[0];
+    var ilosc_liczb = formularz.Fibon.value;
+$('#progressbar').progressbar({ max: ilosc_liczb });
+	document.getElementById('Fibbbo').innerHTML = '';
+	var f1=0;
+	var f2=1;
+	var fx=0;
+	var policzone = 0;
+	setInterval(function() {
+		if (policzone<ilosc_liczb) { document.getElementById('Fibbbo').innerHTML += '<option>'+f2+'</option>';
+		fx=f2;
+		f2=f2+f1;
+		f1=fx; }
+		policzone = policzone + 1;
+		$('#progressbar').progressbar({
+			value : policzone							  
+		});
+	}, 150);
+
+});
+}
+
+function checkForm()
+{
+var errors = false;
+document.getElementById('message').innerHTML = '';
+
+if (!(sprawdzFib()) ) {
+    errors = true;
+	document.getElementById('message').innerHTML += '<b>Nieprawidłowa liczba</b><br />';
+}
+
+// sprawdzenie poprawnosci formularza
+if (errors) document.getElementById('message').innerHTML = document.getElementById('message').innerHTML;
+else {
+liczymy();
+
+}
+return false;
+}
+  
+  </script>
+</head>
+<body>
+ 
+<div id="progressbar"><div class="progress-label">Wpisz n-tą liczbę Fibonacciego...</div></div>
+<div id="blad-liczba"></div>
+<form name="dane" action="#" onsubmit="return checkForm()">
+<table>
+<tr><td><input type="text" name="Fibon" id="Fibon" /></td></tr>
+<tr><td><input type="submit" value="Szukaj" /></td></tr>
+</table>
+</form>
+ <div id="message"></div>
+ <div id="blabla"> 
+<select name="Fibbbo" id="Fibbbo">
+</select>
+ </div>
+ <script type="text/javascript">
+
+</script>
+
+ 
+</body>
+</html>

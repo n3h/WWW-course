@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>zad3</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+    $( document ).ready(function() {
+		$("img").each(function(){
+		var napis = $(this).attr("src").split(".");
+		var napis2 = napis[0].split("/");
+		if (($(this).attr("alt")=="")||($(this).attr("alt")==undefined)) {
+			$(this).attr("alt",napis2[(napis2.length)-1]);
+		}
+		
+		$(this).wrap("<a href=\"images/"+napis2[(napis2.length)-1]+"."+napis[(napis.length)-1]+"\"></a>");
+
+		});
+    });	
+</script>
+</head>
+
+<body>
+
+<img src="thumbs/ferrari.jpg" alt="pjh" />
+<img src="thumbs/ferrari2.jpg" />
+<img src="thumbs/ferrari3.jpg" alt="aas" />
+<img src="thumbs/ferrari4.jpg" alt="" />
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>zad2</title>
+<link rel="stylesheet" href="http://jquery.bassistance.de/validate/demo/site-demos.css">
+ <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+</head>
+<body>
+<form id="formularz">
+<label for="login">Login (przynajmniej 6 znaków):</label><br />
+<input id="login" name="login" />
+<br /><br />
+<label for="haslo">Hasło (przynajmniej 8 znaków):</label><br />
+<input id="haslo" name="haslo" />
+<br/><br />
+<label for="haslo_ponownie">Powtórz hasło:</label><br />
+<input id="haslo_ponownie" name="haslo_ponownie" />
+<br /><br />
+<label for="email">E-mail:</label><br />
+<input id="email" name="email">
+<br/><br />
+<label for="kodpocztowy">Kod pocztowy:</label><br />
+<input id="kodpocztowy" name="kodpocztowy">
+<br/><br />
+<input type="submit" value="Wyślij!">
+</form>
+
+<script>
+
+
+$.validator.addMethod('pocztowykod', function (value) { 
+    return /^(\d{2}-\d{3})$/.test(value); 
+}, 'Wpisz poprawny kod pocztowy');
+
+$( "#formularz" ).validate({
+	rules: {
+		login: {
+			required: true,
+			minlength: 6 
+		},
+		haslo: {
+			required: true,
+			minlength: 8 
+		},
+		haslo_ponownie: {
+			required: true,
+			equalTo: "#haslo"
+		},
+		email: {
+			required: true,
+			email: true
+		},
+		kodpocztowy: {
+			required: true,
+            pocztowykod: true
+		}
+	},
+	messages: {
+		login: {
+			required: "Login jest wymagany",
+			minlength: "Login musi składać się z przynajmniej 6 znaków"
+		},
+		haslo: {
+			required: "Hasło jest wymagane",
+			minlength: "Hasło musi składać się z przynajmniej 8 znaków"
+		},
+		haslo_ponownie: {
+			required: "Ponowne hasło jest wymagane",
+			equalTo: "Hasła muszą być identyczne"
+		},
+		email: {
+			required: "Adres e-mail jest wymagany",
+			email: "Wpisz poprawny adres e-mail w formacie nazwa@domena.com"
+		},
+		kodpocztowy: {
+			required: "Adres e-mail jest wymagany",
+			pocztowykod: "Wpisz poprawny kod pocztowy w formacie XX-YYY"
+		}
+  }
+});
+</script>
+</body>
+</html>
